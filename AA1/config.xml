@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<oleada>5
+  <enemigo tipo="mele"> Kruger
+    <vida>120</vida>
+    <daño>80</daño>
+    <defensa>3</defensa>
+    <fAtaque>2</fAtaque> <!-- Ataques x segundo -->
+    <xp>50</xp>
+    <armas>1
+      <arma categoria="cuchillo">daga
+        <alcance>1</alcance>
+      </arma>
+    </armas>
+  </enemigo>
+  
+  <enemigo tipo="vanguardia"> Anabelle
+     <vida>100</vida>
+    <daño>100</daño>
+    <defensa>2</defensa>
+    <fAtaque>1</fAtaque>
+    <xp>70</xp>
+    <armas>2
+      <arma categoria="fusil">M16
+        <alcance>110</alcance>
+      </arma>
+      <arma categoria="pistola">M9
+        <alcance>50</alcance>
+    </arma>
+    </armas>
+  </enemigo>
+  
+  <enemigo tipo="presicion"> Alien
+     <vida>80</vida>
+    <daño>120</daño>
+    <defensa>1</defensa>
+    <fAtaque>0.4</fAtaque>
+    <xp>100</xp>
+    <armas>2
+      <arma categoria="francotirador">L115A3
+        <alcance>500</alcance>
+      </arma>
+      <arma categoria="pistola">Magnum44
+        <alcance>80</alcance>
+      </arma>
+    </armas>
+  </enemigo>
+
+  <enemigo tipo="vanguardia"> Chuky
+     <vida>100</vida>
+    <daño>100</daño>
+    <defensa>2</defensa>
+    <fAtaque>1</fAtaque>
+    <xp>70</xp>
+    <armas>2
+      <arma categoria="fusil">G36
+        <alcance>120</alcance>
+      </arma>
+      <arma categoria="pistola">M95
+        <alcance>40</alcance>
+      </arma>
+    </armas>
+  </enemigo>
+  
+  <enemigo tipo="apoyo"> Billy
+     <vida>90</vida>
+    <daño>90</daño>
+    <defensa>4</defensa>
+    <fAtaque>1.5</fAtaque>
+    <xp>50</xp>
+    <armas>2
+      <arma categoria="fusil">FAMAS
+        <alcance>100</alcance>
+      </arma>
+      <arma categortia="lanzacohetes">Bazooka
+        <alcance>200</alcance>
+      </arma>
+    </armas>
+   </enemigo>
+
+</oleada>
