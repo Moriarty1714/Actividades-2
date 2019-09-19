@@ -7,10 +7,10 @@
 
 #include "Clasesh.h"
 
-#include "C:\Users\marti\Desktop\ENTI\Programmació\rapidxml.hpp"
-#include "C:\Users\marti\Desktop\ENTI\Programmació\rapidxml_iterators.hpp"
-#include "C:\Users\marti\Desktop\ENTI\Programmació\rapidxml_print.hpp"
-#include "C:\Users\marti\Desktop\ENTI\Programmació\rapidxml_utils.hpp"
+#include "C:\Users\marti\Desktop\ENTI\Programmaciï¿½\rapidxml.hpp"
+#include "C:\Users\marti\Desktop\ENTI\Programmaciï¿½\rapidxml_iterators.hpp"
+#include "C:\Users\marti\Desktop\ENTI\Programmaciï¿½\rapidxml_print.hpp"
+#include "C:\Users\marti\Desktop\ENTI\Programmaciï¿½\rapidxml_utils.hpp"
 
 //AA1
 
@@ -24,10 +24,14 @@ int main() {
 	buffer << file.rdbuf(); //Volquem la info al buffer.
 	file.close();	//Tanquem el fitxer
 	std::string content(buffer.str());	//	???
-	doc.parse<0>(&content[0]);//	??? 
+	doc.parse<0>(&content[0]);//	???
+ 
 	rapidxml::xml_node<> *pNode = doc.first_node();	//creem un punter al document (com a primer node). Amb aquest recorrerem l'arbre.
 	rapidxml::xml_attribute<> *pAttrib = doc.first_attribute();
 
+	for(rapidxml::xml_node <> *pAux1 =pNode->first_node();pAux1;pAux1=pAux1->next_silbing()){
+		
+	}
 
 
 
