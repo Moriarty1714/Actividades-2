@@ -43,17 +43,38 @@ int main(int, char*[])
 	SDL_Texture *playerTexture{ IMG_LoadTexture(m_renderer,RES_IMG "kintoun.png") };
 	if (playerTexture == nullptr) throw "Error: Kintoun doesn't exist";
 	SDL_Rect playerRect{ 0,0, 100, 50 };
-	
+
 	//-->Animated Sprite ---
 
 	// --- TEXT ---
 	if (TTF_Init() == -1) throw "Error: SDL_ttf init";
-	TTF_Font *font(TTF_OpenFont(RES_TTF"saiyan.ttf", 80));
-	if (font == nullptr)throw "Error: saiyan.ttf doesn't exist";
-	SDL_Surface *tmpSurf{ TTF_RenderText_Blended(font, "My SDL game", SDL_Color{ 255,10,25,255 }) };
+	TTF_Font *font80(TTF_OpenFont(RES_TTF"saiyan.ttf", 80));
+	TTF_Font *font60(TTF_OpenFont(RES_TTF"saiyan.ttf", 60));
+	if (font80 == nullptr)throw "Error: saiyan.ttf doesn't exist";
+	SDL_Surface *tmpSurf{ TTF_RenderText_Blended(font80, "My SDL game", SDL_Color{ 255,155,0,255 }) };
 	if (tmpSurf == nullptr) throw "Error: it can't inicialize font";
-	SDL_Texture *textTexture(SDL_CreateTextureFromSurface(m_renderer, tmpSurf));
-	SDL_Rect textRect{ 170, 50, tmpSurf->w, tmpSurf->h };
+
+		//Title
+	SDL_Texture *titleTextTexture(SDL_CreateTextureFromSurface(m_renderer, tmpSurf));
+	SDL_Rect titleRect{ SCREEN_WIDTH/2 - (tmpSurf->w / 2), 50, tmpSurf->w, tmpSurf->h };
+
+		//Play
+	tmpSurf = TTF_RenderText_Blended(font80, "PLAY", SDL_Color{ 0,0,0 });
+		if (tmpSurf == nullptr) throw "Error: it can't inicialize font";
+	SDL_Texture *playTextTexture(SDL_CreateTextureFromSurface(m_renderer, tmpSurf));
+	SDL_Rect playRect{ (SCREEN_WIDTH * 2 / 4) - (tmpSurf->w / 2), SCREEN_HEIGHT * 2 / 3, tmpSurf->w, tmpSurf->h };
+
+		//Sound
+	tmpSurf = TTF_RenderText_Blended(font60, "SOUND", SDL_Color{ 32,155,13 });
+		if (tmpSurf == nullptr) throw "Error: it can't inicialize font";
+	SDL_Texture *soundTextTexture(SDL_CreateTextureFromSurface(m_renderer, tmpSurf));
+	SDL_Rect soundRect{ (SCREEN_WIDTH / 4) - (tmpSurf->w / 2), SCREEN_HEIGHT * 2 / 3, tmpSurf->w, tmpSurf->h };
+
+		//Exit
+	tmpSurf = TTF_RenderText_Blended(font60, "EXIT", SDL_Color{ 255,0,255 });
+		if (tmpSurf == nullptr) throw "Error: it can't inicialize font";
+	SDL_Texture *exitTextTexture(SDL_CreateTextureFromSurface(m_renderer, tmpSurf));
+	SDL_Rect exitRect{(SCREEN_WIDTH *3/4) - (tmpSurf->w / 2), SCREEN_HEIGHT * 2 / 3, tmpSurf->w, tmpSurf->h };
 	
 	// --- AUDIO ---
 	const Uint8 mixFlags(MIX_INIT_MP3 | MIX_INIT_OGG);
@@ -89,17 +110,22 @@ int main(int, char*[])
 		playerRect.x += ((mousePos.x - playerRect.w/2)- playerRect.x) / 10;
 		playerRect.y += ((mousePos.y- playerRect.h/2) - playerRect.y) / 10;
 
+		ButtonsManager(soundRect,playRect,exitRect,soundTextTexture,playTextTexture,exitTextTexture);
+
 		// DRAW
 		SDL_RenderClear(m_renderer);
 
 			//Background
 		SDL_RenderCopy(m_renderer, bgTexture, nullptr, &bgRect);
-		
-			//Mouse
-		SDL_RenderCopy(m_renderer, playerTexture, nullptr, &playerRect);
 
 			//Text
-		SDL_RenderCopy(m_renderer, textTexture, nullptr, &textRect);
+		SDL_RenderCopy(m_renderer, titleTextTexture, nullptr, &titleRect);
+		SDL_RenderCopy(m_renderer, playTextTexture, nullptr, &playRect);
+		SDL_RenderCopy(m_renderer, soundTextTexture, nullptr, &soundRect);
+		SDL_RenderCopy(m_renderer, exitTextTexture, nullptr, &exitRect);
+	
+			//Mouse
+		SDL_RenderCopy(m_renderer, playerTexture, nullptr, &playerRect);
 
 			//PRINT!
 		SDL_RenderPresent(m_renderer);
@@ -109,7 +135,7 @@ int main(int, char*[])
 	// --- DESTROY ---
 	SDL_DestroyTexture(bgTexture);
 	SDL_DestroyTexture(playerTexture);
-	SDL_DestroyTexture(textTexture);
+	SDL_DestroyTexture(titleTextTexture);
 	IMG_Quit();
 
 	Mix_CloseAudio();
