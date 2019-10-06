@@ -59,11 +59,13 @@ int main(int, char*[])
 	SDL_Rect titleRect{ SCREEN_WIDTH/2 - (tmpSurf->w / 2), 50, tmpSurf->w, tmpSurf->h };
 
 		//Play
-	tmpSurf = TTF_RenderText_Blended(font80, "PLAY", SDL_Color{ 0,0,0 });
+	tmpSurf = TTF_RenderText_Blended(font80, "PLAY", SDL_Color{ 100,100,100});
 		if (tmpSurf == nullptr) throw "Error: it can't inicialize font";
-	SDL_Texture *playTextTexture(SDL_CreateTextureFromSurface(m_renderer, tmpSurf));
-	SDL_Rect playRect{ (SCREEN_WIDTH * 2 / 4) - (tmpSurf->w / 2), SCREEN_HEIGHT * 2 / 3, tmpSurf->w, tmpSurf->h };
+		SDL_Texture *playTextTexture{ (SDL_CreateTextureFromSurface(m_renderer, tmpSurf)) };
+		tmpSurf = TTF_RenderText_Blended(font80, "PLAY", SDL_Color{ 100,100,100 }); 
 
+	SDL_Rect playRect{ (SCREEN_WIDTH * 2 / 4) - (tmpSurf->w / 2), SCREEN_HEIGHT * 2 / 3, tmpSurf->w, tmpSurf->h };
+ 
 		//Sound
 	tmpSurf = TTF_RenderText_Blended(font60, "SOUND", SDL_Color{ 32,155,13 });
 		if (tmpSurf == nullptr) throw "Error: it can't inicialize font";
@@ -80,10 +82,13 @@ int main(int, char*[])
 	const Uint8 mixFlags(MIX_INIT_MP3 | MIX_INIT_OGG);
 	if (Mix_OpenAudio(MIX_DEFAULT_FREQUENCY, MIX_DEFAULT_FORMAT, 2, 1024) == -1)	//MIX_OpenAudio(frequenia, format, canals, chunksize)
 		throw "Errors SDL_MIX init";
-	Mix_Music *soundtrack{ Mix_LoadMUS(RES_AU"mainTheme.mp3") };
+	Mix_Music *soundtrack{ Mix_LoadMUS(RES_AU "mainTheme.mp3") };
 	if (!soundtrack) throw "Error: mainTheme doesn't exist";
 	Mix_VolumeMusic(MIX_MAX_VOLUME / 2);
 	Mix_PlayMusic(soundtrack, -1);
+
+	// --- EVENT VARIABLES ---
+	SDL_MouseButtonEvent mouseButtonState; 
 
 	// --- GAME LOOP ---
 	SDL_Event event;
@@ -102,6 +107,9 @@ int main(int, char*[])
 				mousePos.x = event.motion.x ;
 				mousePos.y = event.motion.y ;
 				break;
+			case SDL_MOUSEBUTTONUP:
+				mouseButtonState.button = event.button.button;
+				break;
 			default:;
 			}
 		}
@@ -110,7 +118,7 @@ int main(int, char*[])
 		playerRect.x += ((mousePos.x - playerRect.w/2)- playerRect.x) / 10;
 		playerRect.y += ((mousePos.y- playerRect.h/2) - playerRect.y) / 10;
 
-		ButtonsManager(soundRect,playRect,exitRect,soundTextTexture,playTextTexture,exitTextTexture);
+		ButtonsManager(soundRect,playRect,exitRect,soundTextTexture,playTextTexture,exitTextTexture, mouseButtonState,isRunning);
 
 		// DRAW
 		SDL_RenderClear(m_renderer);
