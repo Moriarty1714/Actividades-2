@@ -26,7 +26,7 @@ void ButtonsMenuManager(SDL_Rect &soundRect, SDL_Rect &playRect, SDL_Rect &exitR
 		SDL_SetTextureColorMod(pText, 255, 212, 0);
 	else SDL_SetTextureColorMod(pText,0, 0,0);
 
-	//Sound
+	//Sound				? Preguntar diferenciens Mix_Play - Mix_PlayMusic i el mateix amb pause
 	switch (Mix_PausedMusic()) {
 	case true:
 		if (mousePos.x < (soundRect.x + soundRect.w) && mousePos.x>soundRect.x && mousePos.y < (soundRect.y + soundRect.h) && mousePos.y > soundRect.y) {
