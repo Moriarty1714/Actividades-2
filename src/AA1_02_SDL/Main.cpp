@@ -109,7 +109,7 @@ int main(int, char*[])
 				mousePos.x = event.motion.x ;
 				mousePos.y = event.motion.y ;
 				break;
-			case SDL_MOUSEBUTTONUP:
+			case SDL_MOUSEBUTTONUP:				//SDL_MOUSEPRESSED canviar (fer struct del mouse)
 				if (event.button.button == SDL_BUTTON_LEFT) clickLeftButton = true; //Arreglar
 				break;
 			default:;
