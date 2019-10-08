@@ -118,7 +118,7 @@ int main(int, char*[])
 		playerRect.x += ((mousePos.x - playerRect.w/2)- playerRect.x) / 10;
 		playerRect.y += ((mousePos.y- playerRect.h/2) - playerRect.y) / 10;
 
-		ButtonsManager(soundRect,playRect,exitRect,soundTextTexture,playTextTexture,exitTextTexture, mouseButtonState,isRunning);
+		ButtonsManager(soundRect,playRect,exitRect,soundTextTexture,playTextTexture,exitTextTexture);
 
 		// DRAW
 		SDL_RenderClear(m_renderer);

@@ -13,7 +13,7 @@ struct Vec2 {
 
 
 //Buttons main menu manager
-void ButtonsManager(SDL_Rect &soundRect, SDL_Rect &playRect, SDL_Rect &exitRect, SDL_Texture *sText, SDL_Texture *pText, SDL_Texture *eText, SDL_MouseButtonEvent mouse,bool &isRunning) {
+void ButtonsManager(SDL_Rect &soundRect, SDL_Rect &playRect, SDL_Rect &exitRect, SDL_Texture *sText, SDL_Texture *pText, SDL_Texture *eText) {
 	
 	//Exit
 	if (mousePos.x < (exitRect.x + exitRect.w) && mousePos.x>exitRect.x && mousePos.y < (exitRect.y + exitRect.y) && mousePos.y > exitRect.y)
@@ -29,7 +29,6 @@ void ButtonsManager(SDL_Rect &soundRect, SDL_Rect &playRect, SDL_Rect &exitRect,
 	if (mousePos.x < (soundRect.x + soundRect.w) && mousePos.x>soundRect.x && mousePos.y < (soundRect.y + soundRect.y) && mousePos.y > soundRect.y) {
 		SDL_SetTextureColorMod(sText, 0, 255, 0);
 
-		if (mouse.button = SDL_BUTTON_LEFT) isRunning = false;
 	}	else SDL_SetTextureColorMod(sText, 32, 155, 13);
 
 }
