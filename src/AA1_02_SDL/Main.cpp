@@ -62,8 +62,6 @@ int main(int, char*[])
 	tmpSurf = TTF_RenderText_Blended(font80, "PLAY", SDL_Color{ 200,200,200});
 		if (tmpSurf == nullptr) throw "Error: it can't inicialize font";
 	SDL_Texture *playTextTexture{ (SDL_CreateTextureFromSurface(m_renderer, tmpSurf)) };
-	tmpSurf = TTF_RenderText_Blended(font80, "PLAY", SDL_Color{ 100,100,100 }); 
-
 	SDL_Rect playRect{ (SCREEN_WIDTH * 2 / 4) - (tmpSurf->w / 2), SCREEN_HEIGHT * 2 / 3, tmpSurf->w, tmpSurf->h };
  
 		//Sound
@@ -77,7 +75,11 @@ int main(int, char*[])
 		if (tmpSurf == nullptr) throw "Error: it can't inicialize font";
 	SDL_Texture *exitTextTexture(SDL_CreateTextureFromSurface(m_renderer, tmpSurf));
 	SDL_Rect exitRect{(SCREEN_WIDTH *3/4) - (tmpSurf->w / 2), SCREEN_HEIGHT * 2 / 3, tmpSurf->w, tmpSurf->h };
-	
+
+	SDL_FreeSurface(tmpSurf);
+	TTF_CloseFont(font60);
+	TTF_CloseFont(font80);
+
 	// --- AUDIO ---
 	const Uint8 mixFlags(MIX_INIT_MP3 | MIX_INIT_OGG);
 	if (Mix_OpenAudio(MIX_DEFAULT_FREQUENCY, MIX_DEFAULT_FORMAT, 2, 1024) == -1)	//MIX_OpenAudio(frequenia, format, canal, chunksize)
@@ -102,14 +104,14 @@ int main(int, char*[])
 				isRunning = false;
 				break;
 			case SDL_KEYDOWN:
-				if (event.key.keysym.sym == SDLK_ESCAPE) isRunning = false;
+				if (event.key.keysym.sym == SDLK_ESCAPE) isRunning = false; //Arreglar
 				break;
 			case SDL_MOUSEMOTION:
 				mousePos.x = event.motion.x ;
 				mousePos.y = event.motion.y ;
 				break;
 			case SDL_MOUSEBUTTONUP:
-				if (event.button.button == SDL_BUTTON_LEFT) clickLeftButton = true;
+				if (event.button.button == SDL_BUTTON_LEFT) clickLeftButton = true; //Arreglar
 				break;
 			default:;
 			}
