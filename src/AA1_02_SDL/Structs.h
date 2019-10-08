@@ -15,9 +15,11 @@ struct Vec2 {
 //Buttons main menu manager
 void ButtonsMenuManager(SDL_Rect &soundRect, SDL_Rect &playRect, SDL_Rect &exitRect, SDL_Texture *sText, SDL_Texture *pText, SDL_Texture *eText, bool &cLeft,bool &isRunning, Mix_Music *sTrack) {
 	
+	//CANVIAR SDL AL UPDATE
+	
 	//Exit
 	if (mousePos.x < (exitRect.x + exitRect.w) && mousePos.x>exitRect.x && mousePos.y  < (exitRect.y + exitRect.h) && mousePos.y > exitRect.y) {	
-		SDL_SetTextureColorMod(eText, 255, 0, 0);
+		SDL_SetTextureColorMod(eText, 255, 0, 0);	
 		if (cLeft) isRunning = false;
 	}	else SDL_SetTextureColorMod(eText, 150, 0, 0);
 
@@ -26,7 +28,7 @@ void ButtonsMenuManager(SDL_Rect &soundRect, SDL_Rect &playRect, SDL_Rect &exitR
 		SDL_SetTextureColorMod(pText, 255, 212, 0);
 	else SDL_SetTextureColorMod(pText,0, 0,0);
 
-	//Sound				? Preguntar diferenciens Mix_Play - Mix_PlayMusic i el mateix amb pause
+	//Sound			
 	switch (Mix_PausedMusic()) {
 	case true:
 		if (mousePos.x < (soundRect.x + soundRect.w) && mousePos.x>soundRect.x && mousePos.y < (soundRect.y + soundRect.h) && mousePos.y > soundRect.y) {

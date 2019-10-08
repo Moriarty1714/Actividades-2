@@ -90,7 +90,6 @@ int main(int, char*[])
 	Mix_PlayMusic(soundtrack, -1);
 	
 	// --- EVENT VARIABLES ---
-		//SDL_MouseButtonEvent ? Perque no deixa utilitzar sense inicialitzar ni el constructor
 	bool clickLeftButton{false};
 	
 	// --- GAME LOOP ---
