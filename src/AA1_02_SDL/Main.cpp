@@ -51,7 +51,7 @@ int main(int, char*[])
 	TTF_Font *font80(TTF_OpenFont(RES_TTF"saiyan.ttf", 80));
 	TTF_Font *font60(TTF_OpenFont(RES_TTF"saiyan.ttf", 60));
 	if (font80 == nullptr)throw "Error: saiyan.ttf doesn't exist";
-	SDL_Surface *tmpSurf{ TTF_RenderText_Blended(font80, "My SDL game", SDL_Color{ 255,155,0,255 }) };
+	SDL_Surface *tmpSurf{ TTF_RenderText_Blended(font80, "My SDL game", SDL_Color{ 255, 155, 0}) };	//?Perque no funciona el alpha
 	if (tmpSurf == nullptr) throw "Error: it can't inicialize font";
 
 		//Title
@@ -59,15 +59,15 @@ int main(int, char*[])
 	SDL_Rect titleRect{ SCREEN_WIDTH/2 - (tmpSurf->w / 2), 50, tmpSurf->w, tmpSurf->h };
 
 		//Play
-	tmpSurf = TTF_RenderText_Blended(font80, "PLAY", SDL_Color{ 100,100,100});
+	tmpSurf = TTF_RenderText_Blended(font80, "PLAY", SDL_Color{ 200,200,200});
 		if (tmpSurf == nullptr) throw "Error: it can't inicialize font";
-		SDL_Texture *playTextTexture{ (SDL_CreateTextureFromSurface(m_renderer, tmpSurf)) };
-		tmpSurf = TTF_RenderText_Blended(font80, "PLAY", SDL_Color{ 100,100,100 }); 
+	SDL_Texture *playTextTexture{ (SDL_CreateTextureFromSurface(m_renderer, tmpSurf)) };
+	tmpSurf = TTF_RenderText_Blended(font80, "PLAY", SDL_Color{ 100,100,100 }); 
 
 	SDL_Rect playRect{ (SCREEN_WIDTH * 2 / 4) - (tmpSurf->w / 2), SCREEN_HEIGHT * 2 / 3, tmpSurf->w, tmpSurf->h };
  
 		//Sound
-	tmpSurf = TTF_RenderText_Blended(font60, "SOUND", SDL_Color{ 32,155,13 });
+	tmpSurf = TTF_RenderText_Blended(font60, "SOUND", SDL_Color{ 255,255,255 });
 		if (tmpSurf == nullptr) throw "Error: it can't inicialize font";
 	SDL_Texture *soundTextTexture(SDL_CreateTextureFromSurface(m_renderer, tmpSurf));
 	SDL_Rect soundRect{ (SCREEN_WIDTH / 4) - (tmpSurf->w / 2), SCREEN_HEIGHT * 2 / 3, tmpSurf->w, tmpSurf->h };
@@ -80,16 +80,17 @@ int main(int, char*[])
 	
 	// --- AUDIO ---
 	const Uint8 mixFlags(MIX_INIT_MP3 | MIX_INIT_OGG);
-	if (Mix_OpenAudio(MIX_DEFAULT_FREQUENCY, MIX_DEFAULT_FORMAT, 2, 1024) == -1)	//MIX_OpenAudio(frequenia, format, canals, chunksize)
+	if (Mix_OpenAudio(MIX_DEFAULT_FREQUENCY, MIX_DEFAULT_FORMAT, 2, 1024) == -1)	//MIX_OpenAudio(frequenia, format, canal, chunksize)
 		throw "Errors SDL_MIX init";
 	Mix_Music *soundtrack{ Mix_LoadMUS(RES_AU "mainTheme.mp3") };
 	if (!soundtrack) throw "Error: mainTheme doesn't exist";
 	Mix_VolumeMusic(MIX_MAX_VOLUME / 2);
 	Mix_PlayMusic(soundtrack, -1);
-
+	
 	// --- EVENT VARIABLES ---
-	SDL_MouseButtonEvent mouseButtonState; 
-
+		//SDL_MouseButtonEvent ? Perque no deixa utilitzar sense inicialitzar ni el constructor
+	bool clickLeftButton{false};
+	
 	// --- GAME LOOP ---
 	SDL_Event event;
 	bool isRunning = true;
@@ -108,7 +109,7 @@ int main(int, char*[])
 				mousePos.y = event.motion.y ;
 				break;
 			case SDL_MOUSEBUTTONUP:
-				mouseButtonState.button = event.button.button;
+				if (event.button.button == SDL_BUTTON_LEFT) clickLeftButton = true;
 				break;
 			default:;
 			}
@@ -118,8 +119,8 @@ int main(int, char*[])
 		playerRect.x += ((mousePos.x - playerRect.w/2)- playerRect.x) / 10;
 		playerRect.y += ((mousePos.y- playerRect.h/2) - playerRect.y) / 10;
 
-		ButtonsManager(soundRect,playRect,exitRect,soundTextTexture,playTextTexture,exitTextTexture);
-
+		ButtonsMenuManager(soundRect,playRect,exitRect,soundTextTexture,playTextTexture,exitTextTexture,clickLeftButton,isRunning, soundtrack);
+		
 		// DRAW
 		SDL_RenderClear(m_renderer);
 
