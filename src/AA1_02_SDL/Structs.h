@@ -18,7 +18,7 @@ void ButtonsMenuManager(SDL_Rect &soundRect, SDL_Rect &playRect, SDL_Rect &exitR
 	//CANVIAR SDL AL UPDATE
 	
 	//Exit
-	if (mousePos.x < (exitRect.x + exitRect.w) && mousePos.x>exitRect.x && mousePos.y  < (exitRect.y + exitRect.h) && mousePos.y > exitRect.y) {	
+	if (mousePos.x < (exitRect.x + exitRect.w) && mousePos.x>exitRect.x && mousePos.y  < (exitRect.y + exitRect.h) && mousePos.y > exitRect.y) {	//Fer funció de colisions
 		SDL_SetTextureColorMod(eText, 255, 0, 0);	
 		if (cLeft) isRunning = false;
 	}	else SDL_SetTextureColorMod(eText, 150, 0, 0);
