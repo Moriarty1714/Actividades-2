@@ -46,6 +46,10 @@ int main(int, char*[])
 
 	//-->Animated Sprite ---
 
+ #pragma region MyRegion
+	//fer servir
+#pragma endregion
+
 	// --- TEXT ---
 	if (TTF_Init() == -1) throw "Error: SDL_ttf init";
 	TTF_Font *font80(TTF_OpenFont(RES_TTF"saiyan.ttf", 80));
