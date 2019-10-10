@@ -7,3 +7,6 @@
 #define RES_IMG R"(../../res/img/)"
 #define RES_TTF R"(../../res/ttf/)"
 #define RES_AU R"(../../res/au/)"
+
+//FPS
+#define FPS 60
