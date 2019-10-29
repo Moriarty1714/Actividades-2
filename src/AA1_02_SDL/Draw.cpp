@@ -8,12 +8,7 @@
 #include <string>
 #include <time.h>
 
-#include "Structs.h"
+#include "Utils.h"
 #include "Constants.h"
+#include "Draw.h"
 
-int main(int, char*[])
-{
-	
-
-	return 0;
-}
