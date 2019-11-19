@@ -119,7 +119,7 @@ int main(int, char*[])
 	#pragma region TIME
 	// --- TIME ---
 	clock_t lastTime = clock();
-	float timeDown = 10.;//Timer
+long long timeDown = 10.;//Timer
 	float deltaTime;
 	#pragma endregion
 

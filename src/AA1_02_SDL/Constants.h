@@ -6,7 +6,7 @@
 //Local Resource
 #define RES_IMG R"(../../res/img/)"
 #define RES_TTF R"(../../res/ttf/)"
-#define RES_AU R"(../../res/au/)"
+#define RES_AU (../../res/au/)
 
 //FPS
 #define FPS 60
