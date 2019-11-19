@@ -39,5 +39,7 @@ int main() {
 	SaveVector(a, "TestSaveVector.bin");
 	for (int i = 0; i < 10; i++) { a[i] = a[i] + 10; };
 	RecoverVector(a, "TestSaveVector.bin");
-	for (int i = 0; i < 10; i++) { std::cout << a[i]; };	return 0;
+	for (int i = 0; i < 10; i++) { std::cout << a[i]; };
+
+	return 0;
 }
