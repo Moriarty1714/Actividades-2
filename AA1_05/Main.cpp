@@ -23,10 +23,12 @@ void RecoverVector(std::vector<int> &o, std::string fileName) {
 	file.open(fileName, std::ios::in | std::ios::binary);
 	if (file.is_open()) {
 		o.clear();
-		size_t len = o.size();
+		size_t len;
+		int tmp;
 		file.read(reinterpret_cast<char*>(&len), sizeof(size_t));
 		for (int i{ 0 }; i < len; i++) {
-			//file.read((o.push_back), sizeof(int));
+			file.read(reinterpret_cast<char*>(&tmp), sizeof(int));
+			o.push_back(tmp);
 		};
 
 		file.close();
