@@ -18,6 +18,7 @@ void SaveIntVector(std::vector<int> o, std::string fileName) {
 		file.write(reinterpret_cast<char*>(&len), sizeof(size_t));
 		for (int i{ 0 }; i < len; i++) {
 			file.write(reinterpret_cast<char*>(&o[i]), sizeof(int));
+			
 		}
 		file.close();
 		std::cout << "Int vector saved." << std::endl;
@@ -89,7 +90,7 @@ int main() {
 	RecoverIntVector(a, "TestSaveVector.bin");
 	std::cout << "Recovered Vector: ";
 
-	for (int i = 0; i < 10; i++) { std::cout << a[i] << " "; }
+	for (int i = 0; i < a.size(); i++) { std::cout << a[i] << " "; }
 	std::cout << std::endl <<std::endl;
 
 	Object tmp;
